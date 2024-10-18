@@ -1,3 +1,13 @@
+/* Stitched together the Zephyr CANopenNode v2 module and the CANopenNode v4 example app
+ * to make this interface code between Zephyr and CANopenNode v4.
+ *
+ * Zephyr CANopenNode v2 module:
+ * https://github.com/zephyrproject-rtos/zephyr/tree/main/modules/canopennode
+ *
+ * CANopenNode v4 example app:
+ * https://github.com/CANopenNode/CANopenNode/tree/master/example
+ */
+
 #include <zephyr/kernel.h>
 #include <zephyr/settings/settings.h>
 #include <zephyr/device.h>
@@ -26,8 +36,8 @@
 CO_t *CO = NULL;
 static CO_NMT_reset_cmd_t reset = CO_RESET_NOT;
 
-static void co_timer_hadler(struct k_timer *timer);
-K_TIMER_DEFINE(co_timer, co_timer_hadler, NULL);
+static void co_timer_handler(struct k_timer *timer);
+K_TIMER_DEFINE(co_timer, co_timer_handler, NULL);
 
 K_THREAD_STACK_ARRAY_DEFINE(co_sdo_server_stack_area, OD_CNT_SDO_SRV, CO_SDO_SRV_STACK_SIZE);
 struct k_thread co_sdo_server_threads_data[OD_CNT_SDO_SRV];
@@ -240,7 +250,7 @@ static void co_rt_thread(void *p1, void *p2, void *p3)
 	}
 }
 
-void co_timer_hadler(struct k_timer *timer)
+void co_timer_handler(struct k_timer *timer)
 {
 	ARG_UNUSED(timer);
 	k_thread_resume(co_main_tid);

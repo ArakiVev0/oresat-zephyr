@@ -11,9 +11,9 @@ OreSat firmware projects using Zephyr RTOS.
 - Arch Linux
 
     ```bash
-    paru -S git cmake ninja gperf dtc wget \
-      python python-dev python-pip python-setuptools python-wheel \
-      xz file make gcc sdl2 openocd stlink
+    sudo pacman -S git cmake ninja gperf ccache dfu-util dtc wget \
+      python-dev python-pip python-setuptools python-tk python-wheel \
+      xz file make sdl2 stlink
     ```
 
 - Debian Linux
@@ -22,13 +22,12 @@ OreSat firmware projects using Zephyr RTOS.
     sudo apt install --no-install-recommends git cmake ninja-build gperf \
       ccache dfu-util device-tree-compiler wget \
       python3-dev python3-pip python3-setuptools python3-tk python3-wheel \
-      xz-utils file make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1 \
-      openocd stlink-tools
+      xz-utils file make libsdl2-dev libmagic1 stlink-tools
     ```
 
 ### Install Zephyr SDK
 
-- Arch Linux
+- Arch Linux (from AUR)
 
     ```bash
     paru -S zephyr-sdk-bin
@@ -77,10 +76,16 @@ west zephyr-export
 pip install -r zephyr/scripts/requirements.txt
 ```
 
-### Install OreSat Python dependencies
+### Install OreSat Configs
+
+While the latest oresat-configs release can be install via `pip`,
+for development, it is better to have latest code from the git repo.
 
 ```bash
+cd oresat-configs
 pip install -r requirements.txt
+./build_and_install.sh
+cd -
 ```
 
 ### Test compile and flash
@@ -90,3 +95,23 @@ cd zephyr/samples/basic/blinky
 west build -p always -b nucleo_f091rc .
 west flash --runner openocd
 ```
+
+## Tools
+
+- [clang-format]: Used to auto format the code. Can be installed with
+  the `clang-format` package.
+
+### CAN Tools
+
+Since the main communication bus on OreSat is a CAN bus, CAN bus monitoring
+tools are needed for development and testing.
+
+- [candump]: Useful for monitoring if there is some CAN communication. Can be
+  installed with `can-utils` package.
+- [SavvyCAN]: A GUI to decode and display/graph signals from CAN messages.
+  Use `oresat-configs` to generate the .dbc file used to decode CAN messages
+  and their signals with SavvyCAN.
+
+[clang-format]:https://clang.llvm.org/docs/ClangFormat.html
+[candump]:https://manpages.debian.org/testing/can-utils/candump.1.en.html
+[SavvyCAN]:https://github.com/collin80/SavvyCAN

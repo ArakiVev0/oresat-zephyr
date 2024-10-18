@@ -1,7 +1,11 @@
-/*
- * Copyright (c) 2019 Vestas Wind Systems A/S
+/* Stitched together the Zephyr CANopenNode v2 module and the CANopenNode v4 example app
+ * to make this interface code between Zephyr and CANopenNode v4.
  *
- * SPDX-License-Identifier: Apache-2.0
+ * Zephyr CANopenNode v2 module:
+ * https://github.com/zephyrproject-rtos/zephyr/tree/main/modules/canopennode
+ *
+ * CANopenNode v4 example app:
+ * https://github.com/CANopenNode/CANopenNode/tree/master/example
  */
 
 #include <zephyr/kernel.h>
@@ -17,8 +21,8 @@
 #define OD_CNT_RX_MSG (OD_CNT_NMT + OD_CNT_SYNC + OD_CNT_SDO_SRV)
 
 struct can_filter_user_data {
-	void *object;                 // a CANopenNode object (first arg to func)
-	void (*func)(void *, void *); // object, can_Frame
+	void *object;                 /* a CANopenNode object (first arg to func) */
+	void (*func)(void *, void *); /* object, can_frame */
 };
 
 static struct can_filter filters[OD_CNT_RX_MSG];
@@ -197,7 +201,7 @@ CO_ReturnError_t CO_CANmodule_init(CO_CANmodule_t *CANmodule, void *CANptr, CO_C
 	CANmodule->txSize = txSize;
 	CANmodule->CANerrorStatus = 0;
 	CANmodule->CANnormal = false;
-	CANmodule->useCANrxFilters = (rxSize <= 32U) ? true : false; // TODO
+	CANmodule->useCANrxFilters = rxSize <= can_get_max_filters();
 	CANmodule->bufferInhibitFlag = false;
 	CANmodule->firstCANtxMessage = false;
 	CANmodule->CANtxCount = 0U;

@@ -22,8 +22,7 @@ static inline uint8_t oresat_get_node_id(void)
 	return node_id;
 }
 
-/** add node id to sdo cob ids */
-static inline void oresat_fix_cob_ids_in_od(uint8_t node_id)
+static inline void oresat_fix_pdo_cob_ids(uint8_t node_id)
 {
 	uint32_t cob_id;
 	OD_entry_t *entry;

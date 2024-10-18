@@ -1,18 +1,15 @@
-/*
- * Copyright (c) 2019 Vestas Wind Systems A/S
+/* Stitched together the Zephyr CANopenNode v2 module and the CANopenNode v4 example app
+ * to make this interface code between Zephyr and CANopenNode v4.
  *
- * SPDX-License-Identifier: Apache-2.0
+ * Zephyr CANopenNode v2 module:
+ * https://github.com/zephyrproject-rtos/zephyr/tree/main/modules/canopennode
+ *
+ * CANopenNode v4 example app:
+ * https://github.com/CANopenNode/CANopenNode/tree/master/example
  */
 
-#ifndef ZEPHYR_MODULES_CANOPENNODE_CO_DRIVER_H
-#define ZEPHYR_MODULES_CANOPENNODE_CO_DRIVER_H
-
-/*
- * Zephyr RTOS CAN driver interface and configuration for CANopenNode
- * CANopen protocol stack.
- *
- * See CANopenNode/stack/drvTemplate/CO_driver.h for API description.
- */
+#ifndef CO_DRIVER_H
+#define CO_DRIVER_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -23,7 +20,7 @@ extern "C" {
 #include <zephyr/device.h>
 #include <zephyr/drivers/can.h>
 #include <zephyr/toolchain.h>
-#include <zephyr/dsp/types.h> /* float32_t, float64_t */
+#include <zephyr/dsp/types.h>
 #include <CO_driver_custom.h>
 
 /* Use static variables instead of calloc() */
@@ -173,4 +170,4 @@ void canopen_od_unlock(CO_CANmodule_t *CANmodule);
 }
 #endif
 
-#endif /* ZEPHYR_MODULES_CANOPENNODE_CO_DRIVER_H */
+#endif
