@@ -8,8 +8,8 @@
  * https://github.com/CANopenNode/CANopenNode/tree/master/example
  */
 
-#ifndef CO_DRIVER_H
-#define CO_DRIVER_H
+#ifndef CO_DRIVER_TARGET_H
+#define CO_DRIVER_TARGET_H
 
 #ifdef __cplusplus
 extern "C" {

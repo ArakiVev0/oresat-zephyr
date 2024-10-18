@@ -201,7 +201,7 @@ CO_ReturnError_t CO_CANmodule_init(CO_CANmodule_t *CANmodule, void *CANptr, CO_C
 	CANmodule->txSize = txSize;
 	CANmodule->CANerrorStatus = 0;
 	CANmodule->CANnormal = false;
-	CANmodule->useCANrxFilters = rxSize <= can_get_max_filters();
+	CANmodule->useCANrxFilters = rxSize <= max_filters;
 	CANmodule->bufferInhibitFlag = false;
 	CANmodule->firstCANtxMessage = false;
 	CANmodule->CANtxCount = 0U;
