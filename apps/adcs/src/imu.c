@@ -6,6 +6,8 @@
 #include "oresat.h"
 
 static const struct device *const dev_gyro = DEVICE_DT_GET_ONE(bosch_bmi08x_gyro);
+static const struct device *const dev_accel = DEVICE_DT_GET_ONE(bosch_bmi08x_accel);
+
 static bool gyro_ok = false;
 
 void imu_init(void)

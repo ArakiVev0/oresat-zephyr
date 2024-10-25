@@ -8,4 +8,12 @@
 		gyro-hz = "100_32";
 		gyro-fs = <1000>;
 	};
+
+  bmi08x-accel@18 {
+      status = "okay";
+      compatible = "bosch,bmi08x-accel";
+      reg = <0x18>;
+      accel-hz = "100";
+      accel-fs = <3>;
+    };
 };
